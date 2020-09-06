@@ -2,28 +2,34 @@ import React, { Component } from "react";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
-
 import "./App.css";
+import axios from "axios";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      inventory: [
-        { name: "starburst", price: 14, img: "img.jpg" },
-        { name: "snickers", price: 23, img: "img.jpg" },
-        { name: "reeses", price: 15, img: "img.jpg" },
-        { name: "skittles", price: 23, img: "img.jpg" },
-        { name: "gummy worms", price: 51, img: "img.jpg" },
-      ],
+      inventory: [],
     };
   }
+  componentDidMount() {
+    axios
+      .get("/api/inventory")
+      .then((res) => {
+        this.setState({
+          inventory: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+
   render() {
+    const { inventory } = this.state;
     return (
       <div className="App">
         <Header />
-        <Dashboard />
+        <Dashboard inventory={inventory} />
         <Form />
       </div>
     );

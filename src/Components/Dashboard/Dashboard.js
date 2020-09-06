@@ -3,13 +3,14 @@ import Product from "../Product/Product";
 
 class Dashboard extends Component {
   render() {
+    const { inventory } = this.props;
     return (
       <div>
-        <Product />
-        <p>Dashboard</p>
+        {inventory.map((element) => {
+          return <Product products={element} />;
+        })}
       </div>
     );
   }
 }
-
 export default Dashboard;
