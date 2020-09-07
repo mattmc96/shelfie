@@ -1,18 +1,27 @@
+/** @format */
+
 import React, { Component } from "react";
+import axios from "axios";
 
 class Form extends Component {
   constructor() {
-    super();
+    // pass props
+    super(); // pass props
 
     //TODO figure out price for state
 
-    this.state = { name: "", price: 0, imgurl: "" };
+    this.state = {
+      name: "",
+      price: 0,
+      img: "",
+    };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-  handleOnChange = (e) => {
+  handleOnChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -20,8 +29,23 @@ class Form extends Component {
     this.setState({
       name: "",
       price: "",
-      imgurl: "",
+      img: "",
     });
+  };
+
+  handleOnSubmit = e => {
+    e.preventDefault();
+    const { name, price, img } = this.state;
+    const { onSubmit } = this.props;
+    const product = { name, price, img };
+
+    axios.post("/api/product", product).then(res => {
+      this.setState({
+        inventory: res.data,
+      });
+      onSubmit.getInventory();
+    });
+    this.handleOnClick();
   };
 
   render() {
@@ -41,8 +65,8 @@ class Form extends Component {
           />
 
           <input
-            name="imgurl"
-            value={this.state.imgurl}
+            name="img"
+            value={this.state.img}
             onChange={this.handleOnChange}
           />
 

@@ -1,3 +1,5 @@
+/** @format */
+
 require("dotenv").config();
 const express = require("express");
 const massive = require("massive");
@@ -12,17 +14,17 @@ massive({
   connectionString: CONNECTION_STRING,
   ssl: { rejectUnauthorized: false },
 })
-  .then((db) => {
+  .then(db => {
     app.set("db", db);
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
 
 app.use(express.json());
 
 app.get("/api/inventory", ctrl.getAllProducts);
 app.post("/api/product", ctrl.createProduct);
 // app.put("/api/inventory/:id", ctrl.editProducts);
-// app.delete("/api/inventory/:id", ctrl.deleteProducts);
+app.delete("/api/product/:id", ctrl.deleteProduct);
 
 app.listen(SERVER_PORT, () =>
   console.log(`Ain't nothing to it but to do it ✨:${SERVER_PORT}`)

@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { Component } from "react";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Form from "./Components/Form/Form";
@@ -12,25 +14,39 @@ class App extends Component {
     this.state = {
       inventory: [],
     };
+
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
+
   componentDidMount() {
+    this.onFormSubmit();
+  }
+
+  onFormSubmit() {
     axios
       .get("/api/inventory")
-      .then((res) => {
+      .then(res => {
         this.setState({
           inventory: res.data,
         });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }
+
+  // formInventory = (products) => {
+  //   this.setState({ newInventory: products });
+  // };
 
   render() {
     const { inventory } = this.state;
     return (
       <div className="App">
         <Header />
-        <Dashboard inventory={inventory} />
-        <Form />
+        <Dashboard inventory={inventory} getInventory={this.onFormSubmit} />
+        <Form
+          getInventory={this.onFormSubmit}
+          addProducts={inventory.newInventory}
+        />
       </div>
     );
   }
