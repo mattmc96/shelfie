@@ -6,4 +6,3 @@ CREATE TABLE products (
 );
 
 
-

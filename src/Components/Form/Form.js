@@ -1,24 +1,35 @@
 /** @format */
 
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component {
-  constructor() {
-    // pass props
-    super(); // pass props
-
-    //TODO figure out price for state
+  constructor(props) {
+    super(props);
 
     this.state = {
-      name: "",
+      id: null,
+      name: '',
       price: 0,
-      img: "",
+      img: '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    // this.currentProduct = this.currentProduct.bind(this)
+    // this.handleSave = this.handleSave.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.currentProduct !== prevProps.currentProduct) {
+      this.setState({
+        id: this.props.id,
+        name: this.props.name,
+        price: this.props.price,
+        img: this.props.img,
+      });
+    }
   }
 
   handleOnChange = e => {
@@ -27,9 +38,9 @@ class Form extends Component {
 
   handleOnClick = () => {
     this.setState({
-      name: "",
-      price: "",
-      img: "",
+      name: '',
+      price: '',
+      img: '',
     });
   };
 
@@ -39,13 +50,26 @@ class Form extends Component {
     const { onSubmit } = this.props;
     const product = { name, price, img };
 
-    axios.post("/api/product", product).then(res => {
+    axios.post('/api/product', { product }).then(res => {
       this.setState({
         inventory: res.data,
       });
       onSubmit.getInventory();
+      this.handleOnClick();
     });
-    this.handleOnClick();
+  };
+
+  updateProduct = id => {
+    const { name, price, img } = this.state;
+    const edit = { name, price, img };
+    axios
+      .put(`/api/inventory/${id}`, edit)
+      .then(res => {
+        this.setState({
+          inventory: res.data,
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -53,27 +77,31 @@ class Form extends Component {
       <form>
         <div>
           <input
-            name="name"
+            name='name'
             value={this.state.name}
             onChange={this.handleOnChange}
           />
 
           <input
-            name="price"
+            name='price'
             value={this.state.price}
             onChange={this.handleOnChange}
           />
 
           <input
-            name="img"
+            name='img'
             value={this.state.img}
             onChange={this.handleOnChange}
           />
 
-          <button value="cancel" onClick={this.handleOnClick}>
+          <button value='cancel' onClick={this.handleOnClick}>
             Cancel
           </button>
-          <button>Add to Inventory</button>
+          {this.state.id ? (
+            <button onClick={() => this.handleSubmit()}>Save Changes</button>
+          ) : (
+            <button onClick={() => this.handleSave()}>Add to Inventory</button>
+          )}
         </div>
       </form>
     );
