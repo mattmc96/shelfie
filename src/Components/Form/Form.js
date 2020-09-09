@@ -133,7 +133,8 @@ class Form extends Component {
             onSubmit={e => {
               e.preventDefault();
               this.props.location.state
-                ? this.editItem()
+                ? //fix this bbecause it is is  no bueno
+                  this.handleOnSubmit()
                 : this.updateProduct();
               window.location.replace('/');
             }}>
