@@ -1,38 +1,146 @@
-.App {
-  text-align: center;
+/** @format */
+@import './reset.css';
+
+/* Figure out the media queires monday */
+
+/* @media (min-width: 400px); */
+
+.headhancho {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 100px;
+  align-items: center;
+  background-color: red;
+  text-decoration: none;
+}
+.headhancho-btn-box {
+  display: flex;
+  flex-direction: row;
+  row-gap: 5px;
+  margin-right: 50px;
+  column-gap: 30px;
+}
+img {
+  padding-right: 50px;
+}
+.icon {
+  display: flex;
+  justify-items: space-between;
+  column-gap: 20px;
+  text-decoration: none;
+}
+.el-hefe {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.inventory-btn {
+  display: flex;
+  height: 30px;
+
+  background-color: orange;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.link {
+  text-decoration: none;
+}
+.formula {
+  height: 50%;
+  width: 50%;
+  justify-content: center;
+  row-gap: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form {
+  border: solid black 1px;
+  width: 80%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.shelfie {
+  font-size: 35px;
+  border: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-decoration: none;
+  color: white;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.formbox {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* padding-left: 50px; */
 }
 
-.App-link {
-  color: #61dafb;
+.formbutton {
+  box-sizing: border-box;
+  background-color: green;
+  left: -100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+}
+
+.formation {
+  box-sizing: border-box;
+  height: 60vh;
+  width: 30vw;
+  box-shadow: 2px 5px gray;
+  border: none;
+  display: flex;
+  margin-left: 300px;
+  border-radius: 5%;
+  margin-top: 50px;
+  padding-top: 100px;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3ad886;
+  /* padding-left: 200px; */
+}
+
+.firstimage {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.f-btn {
+  background-color: #ed5b5a;
+  border-radius: 10%;
+}
+
+.input-holder {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  margin-top: 10px;
+  row-gap: 20px;
+  /* row-gap: 30px; */
+}
+.btn-box {
+  box-sizing: border-box;
+  display: flex;
+  column-gap: 200px;
+  padding-top: 10px;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  padding-top: 0px;
+  font-size: 20px;
+}
+
+.firstimage {
+  width: 380px;
+  height: 210px;
 }

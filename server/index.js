@@ -21,6 +21,7 @@ massive({
 
 app.use(express.json());
 
+app.get('/api/product/:id', ctrl.getOne);
 app.get('/api/inventory', ctrl.getAllProducts);
 app.post('/api/product', ctrl.createProduct);
 app.put('/api/inventory/:id', ctrl.editProduct);
