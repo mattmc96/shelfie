@@ -12,7 +12,7 @@ const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
 massive({
   connectionString: CONNECTION_STRING,
-  ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false }
 })
   .then(db => {
     app.set('db', db);
@@ -21,7 +21,7 @@ massive({
 
 app.use(express.json());
 
-app.get('/api/product/:id', ctrl.getOne);
+app.get('/api/products/:id', ctrl.getOne);
 app.get('/api/inventory', ctrl.getAllProducts);
 app.post('/api/product', ctrl.createProduct);
 app.put('/api/inventory/:id', ctrl.editProduct);

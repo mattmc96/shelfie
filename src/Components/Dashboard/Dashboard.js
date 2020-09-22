@@ -5,24 +5,22 @@ import axios from 'axios';
 import Product from '../Product/Product';
 
 class Dashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      inventory: [],
+      inventory: []
     };
-
-    this.deleteProduct = this.deleteProduct.bind(this);
     this.getInventory = this.getInventory.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
   }
   componentDidMount() {
     this.getInventory();
   }
-
   getInventory = () => {
     axios.get('/api/inventory').then(res => {
       this.setState({
-        inventory: res.data,
+        inventory: res.data
       });
     });
   };
@@ -31,20 +29,19 @@ class Dashboard extends Component {
     axios
       .delete(`/api/product/${id}`)
       .then(res => this.getInventory())
-      .catch(err => console.log('Dont worry bud try again later'));
+      .catch(err => console.log('Dont worry bud try again later', err));
   };
 
   render() {
-    const { inventory } = this.state;
     return (
       <div className='dashboard'>
-        {inventory.map((el, i) => {
+        {this.state.inventory.map(e => {
           return (
             <Product
-              products={el}
-              key={i}
+              products={e}
+              key={e.id}
               deleteProduct={this.deleteProduct}
-              selectedProduct={this.props.selectedProduct}
+              // selectedProduct={this.props.selectedProduct}
             />
           );
         })}

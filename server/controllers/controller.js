@@ -6,7 +6,7 @@ module.exports = {
 
     db.get_products()
       .then(products => res.status(200).send(products))
-      .catch(err => console.log('Dont worry bud try again later😔'));
+      .catch(err => console.log('Dont worry bud try again later 0'));
   },
 
   createProduct: (req, res) => {
@@ -15,9 +15,9 @@ module.exports = {
 
     db.create_product(name, price, img)
       .then(products => {
-        res.sendStatus(200);
+        res.status(200).send();
       })
-      .catch(err => console.log('Dont worry bud try again later😔'));
+      .catch(err => console.log('Dont worry bud try again later 1'));
   },
   deleteProduct: (req, res) => {
     const db = req.app.get('db');
@@ -27,25 +27,28 @@ module.exports = {
       .then(() => {
         res.sendStatus(200);
       })
-      .catch(err => console.log('Dont worry bud try again later😔'));
+      .catch(err => console.log('Dont worry bud try again later 2'));
   },
   editProduct: (req, res) => {
-    const { id } = req.params;
-    const { name, price, img } = req.body;
     const db = req.app.get('db');
+    const { name, price, img } = req.body;
+    const { id } = req.params;
 
     db.edit_product(id, name, price, img)
       .then(() => {
-        res.sendStatus(200);
+        res.status(200).send();
       })
-      .catch(err => console.log('Dont worry bud try again later😔'));
+      .catch(err => console.log('Dont worry bud try again later 3'));
   },
   getOne: (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
 
     db.get_one_product(id)
-      .then(product => res.status(200).send(product))
-      .catch(err => console.log('Dont worry bud try again later😔'));
-  },
+      .then(product => {
+        product = product[0];
+        res.status(200).send(product);
+      })
+      .catch(err => console.log('Dont worry bud try again later 4'));
+  }
 };
